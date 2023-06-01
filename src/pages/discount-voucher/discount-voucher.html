@@ -1,0 +1,55 @@
+<!--
+  Generated template for the DiscountVoucherPage page.
+  
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'Discount Voucher' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <form #f="ngForm" (ngSubmit)="f.form.valid && submit()">
+    <div class="flat-from">
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && mobile_no?.invalid}">
+        <ion-label floating>{{'Enter Pet Parent Mobile No' | translate}}.*</ion-label>
+        <ion-input type="tel" name="mobile_no" #mobile_no="ngModel" [(ngModel)]="data.mobile_no" required   maxlength="10" minlength="10" (ngModelChange)="CheckCustomer(data.mobile_no)" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && mobile_no?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ng-container *ngIf="data.complaint_detail">
+        <ion-item class="cs-input">
+          <ion-label floating>{{' Pet Parent Name' | translate}}</ion-label>
+          <ion-input type="text" name="complaint_detail" #complaint_detail="ngModel" [(ngModel)]="data.complaint_detail" readonly ></ion-input>
+        </ion-item>
+        <ion-item class="cs-input" [ngClass]="{'error':f.submitted && coupon_code?.invalid}" >
+          <ion-label floating>{{'Enter Coupon Number' | translate}}.*</ion-label>
+          <ion-input type="text" name="coupon_code" #coupon_code="ngModel" [(ngModel)]="data.coupon_code" (ngModelChange)="CheckCoupon(data.coupon_code)" minlength="10" maxlength="50" required></ion-input>
+        </ion-item>
+        <div class="eror" *ngIf="f.submitted && coupon_code?.invalid">
+          <p> {{ 'This field is required' | translate}}</p>
+        </div>
+        <div class="eror" *ngIf="status == 'coupon_not_exist' ">
+          <p> {{ 'Invalid coupon' | translate}}</p>
+        </div>
+        <div class="eror" *ngIf="status == 'coupon_used' ">
+          <p> {{ 'Coupon code already used' | translate}}</p>
+        </div>
+        <div class="eror" *ngIf="status == 'coupon_not_assigned' || status == 'coupon_not_assigned_this_customer'">
+          <p> {{ 'Coupon code not assign' | translate}}</p>
+        </div>
+      </ng-container>
+      <button ion-button class="cs-btn mb50">
+        {{ 'Save' | translate}}
+      </button>
+    </div>
+  </form>
+  
+  
+  
+</ion-content>

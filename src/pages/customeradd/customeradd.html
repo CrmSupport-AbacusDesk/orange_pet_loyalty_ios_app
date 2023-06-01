@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title >{{'Add Pet Parent' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <form #f="ngForm" (ngSubmit)="f.form.valid ? submit() : scrollUp()">
+    
+    <div class="heading line" >
+      <p>{{'Basic Information' | translate}}</p>
+    </div>
+    <div class="flat-from">
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && customer_name?.invalid}">
+        <ion-label floating>{{'Pet Parent Name' | translate}}*</ion-label>
+        <ion-input type="text" name="customer_name" #customer_name="ngModel" [(ngModel)]="data.customer_name" (ngModelChange)="(data.customer_name!=null)?data.customer_name[0] = data.customer_name[0].toUpperCase():''" (keypress)="namecheck($event)" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && customer_name?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && mobile_no?.invalid}">
+        <ion-label floating>{{'Pet Parent Mobile No' | translate}}.*</ion-label>
+        <ion-input type="tel" name="mobile_no" #mobile_no="ngModel" [(ngModel)]="data.mobile_no" required   maxlength="10" minlength="10" (ngModelChange)="CheckCustomer(data.mobile_no)" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && mobile_no?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-input" [ngClass]="{'error':(f.submitted && email?.invalid) || (f.submitted && !email.valid)}">
+        <ion-label floating>{{'Pet Parent Email ID' | translate}}</ion-label>
+        <ion-input type="email" name="email" #email="ngModel" [(ngModel)]="data.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"></ion-input>
+      </ion-item>
+      
+      
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && whatsapp_mobile_no?.invalid}">
+        <ion-label floating>{{'Pet Parent Whatsapp No' | translate}}.*</ion-label>
+        <ion-input type="tel" name="whatsapp_mobile_no" #whatsapp_mobile_no="ngModel" [(ngModel)]="data.whatsapp_mobile_no" required   maxlength="10" minlength="10" (ngModelChange)="CheckCustomer(data.whatsapp_mobile_no)" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && whatsapp_mobile_no?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && brand_currently_used?.invalid}">
+        <ion-label floating>{{'Brands Currently Used' | translate}}.*</ion-label>
+        <ion-input type="text" name="brand_currently_used" #brand_currently_used="ngModel" [(ngModel)]="data.brand_currently_used" required ></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && brand_currently_used?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <!-- <ion-item class="cs-input" [ngClass]="{'error':f.submitted && average_selling_price?.invalid}">
+        <ion-label floating>{{'Selling Price' | translate}}*</ion-label>
+        <ion-input type="text" name="average_selling_price" #average_selling_price="ngModel" [(ngModel)]="data.average_selling_price" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && average_selling_price?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div> -->
+
+
+
+      <ion-item class="cs-select" [ngClass]="{'error':f.submitted && pet_type?.invalid}">
+        <ion-label floating>{{'Pet Type' | translate}}</ion-label>
+       
+        <ion-select name="pet_type" [(ngModel)]="data.pet_type" #pet_type="ngModel" >
+            <ion-option  value="Dog">Dog</ion-option>
+            <ion-option  value="Cat">Cat</ion-option>
+            <ion-option  value="Bird">Bird</ion-option>
+            <ion-option  value="Small_Animal">Small Animal</ion-option>
+
+        </ion-select>
+    </ion-item>
+
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && pet_age?.invalid}">
+        <ion-label floating>{{'Pet Age' | translate}}*</ion-label>
+        <ion-input type="tel" name="pet_age" #pet_age="ngModel" [(ngModel)]="data.pet_age" ></ion-input>
+      </ion-item>
+
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && pet_breed?.invalid}">
+        <ion-label floating>{{'Pet Breed' | translate}}*</ion-label>
+        <ion-input type="text" name="pet_breed" #pet_breed="ngModel" [(ngModel)]="data.pet_breed" ></ion-input>
+      </ion-item>
+    </div>
+    
+    <div class="heading line" >
+      <p>{{'Interested in Brands Starter Kit' | translate}}</p>
+  </div>
+  <div class="ragistration-fields pt10">
+      <div class="radio-section">
+          <ion-list radio-group name="nutrition_brand" [(ngModel)]="data.nutrition_brand" #nutrition_brand="ngModel" required>
+              <ion-item *ngFor="let row of brandStarter">
+                  <ion-radio value="{{row.brand_starter}}"  [disabled]="row.choice == 'true'"></ion-radio>
+                  <ion-label >{{row.brand_starter}}</ion-label>
+              </ion-item>
+              <!-- <div class="eror" *ngIf="nutrition_brand.errors?.required">
+                <p> {{ 'This field is required' | translate}}</p>
+              </div> -->
+              <p class="error-msg" style="color: red;" *ngIf="nutrition_brand.errors?.required">{{'This field is required' | translate}}</p>
+
+          </ion-list>
+      </div>
+  </div> 
+    <!--//////////////// importaint //////////////-->
+    
+    <div class="heading line">
+      <p>{{'Address Information' | translate}}</p>
+    </div>
+    <div class="flat-from">
+      <ion-item class="cs-input" [ngClass]="{'error':(f.submitted && address?.invalid) || (f.submitted && !address.valid)}">
+        <ion-label floating>{{'Address' | translate}}*</ion-label>
+        
+        <ion-input type="text" name="address" #address="ngModel" [(ngModel)]="data.address" (ngModelChange)="caps_add(data.address)" required></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && address?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-input" [ngClass]="{'error':f.submitted && pincode?.invalid}">
+        <ion-label floating>{{'Pincode' | translate}}*</ion-label>
+        <ion-input type="tel" name="pincode" [(ngModel)]="data.pincode" #pincode="ngModel" required maxlength="6" minlength="6" (input)="getaddress(data.pincode)"></ion-input>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && pincode?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-select" [ngClass]="{'error':f.submitted && state?.invalid}">
+        <ion-label floating>{{'State' | translate}}*</ion-label>
+        <ion-select name="state" [(ngModel)]="data.state" #state="ngModel" (ngModelChange)="getDistrictList(data.state)" required>
+          <ion-option *ngFor="let row of state_list" value="{{row.state_name}}">{{row.state_name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      
+      <div class="eror" *ngIf="f.submitted && state?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-select" [ngClass]="{'error':f.submitted && state?.invalid}">
+        <ion-label floating>{{'District' | translate}}*</ion-label>
+        <ion-select name="district" [(ngModel)]="data.district" #district="ngModel" (ngModelChange)="getCityList(data.district)" required>
+          <ion-option *ngFor="let row of district_list" value="{{row.district_name}}">{{row.district_name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="eror" *ngIf="f.submitted && district?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+      
+      <ion-item class="cs-input mb0" [ngClass]="{'error':f.submitted && city?.invalid}">
+        <ion-label floating>{{'City' | translate}}*</ion-label>
+        <ion-input type="text" name="city" [(ngModel)]="data.city" #city="ngModel" required></ion-input>
+      </ion-item>
+      
+      <div class="eror" *ngIf="f.submitted && city?.invalid">
+        <p> {{ 'This field is required' | translate}}</p>
+      </div>
+    </div>
+    
+<!--     
+    <div class="heading line">
+      <p>{{'Brands of Orange Pet Nutrition' | translate}}</p>
+    </div>
+    <ion-item>
+      <ion-label>{{'Fidele+' | translate}}</ion-label>
+      <ion-checkbox color="secondary" checked="true" name="fidelet" #fidelet="ngModel" [(ngModel)]="data.fidelet" >
+      </ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>{{'Arden Grange' | translate}}</ion-label>
+      <ion-checkbox color="secondary" checked="true" name="arden_grange" #arden_grange="ngModel" [(ngModel)]="data.arden_grange" >
+      </ion-checkbox>
+    </ion-item>
+    
+    
+    <ion-item>
+      <ion-label>{{'Taste Of The Wild (TOW)' | translate}}</ion-label>
+      <ion-checkbox color="secondary" checked="true" name="taste_of_the_wild" #taste_of_the_wild="ngModel" [(ngModel)]="data.taste_of_the_wild">
+      </ion-checkbox>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>{{'None' | translate}}</ion-label>
+      <ion-checkbox color="secondary" checked="true" name="none" #none="ngModel" [(ngModel)]="data.none" >
+      </ion-checkbox>
+    </ion-item> -->
+    <div class="pr16 pl16">
+      <button ion-button class="cs-btn mb50">
+        {{ 'Submit' | translate}}
+      </button>
+    </div>
+    
+  </form>
+</ion-content>

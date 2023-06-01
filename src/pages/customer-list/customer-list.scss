@@ -1,0 +1,22 @@
+page-customer-list {
+    .cs-list .top-block.footer-block{
+        p{
+            display: inline-flex;
+            align-items: flex-start;
+            grid-column-gap: 5px;
+        }
+        
+        i{
+            font-size: 22px;
+            color: #ff8300;
+        }
+    }
+
+    .searchbar-md .searchbar-input{
+        border-radius: 50px !important;
+    }
+
+    ion-searchbar.searchbar-md .searchbar-input-container input{
+        margin-top: 0px !important;
+    }
+}

@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>aboutus-modal</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="main-modal">
+        <div class="modal-box">
+            <div class="pl16 pr16">
+            <h1>{{'Orange Loyalty App' | translate}}</h1>
+            <h2>{{'Your request to access the Orange Pet is under review. You will be able to log in as soon as the overseeing admin acknowledges your application' | translate}}.</h2>
+            <p>{{'Meanwhile, you can contact us' | translate}} <a href="tel:18002702040">1800-270-2040</a> {{'or mail us' | translate}} <span>customersupport@orangepet.in</span> {{'if you any question' | translate}}.</p>
+        </div>
+            <button ion-button full outline (click)="gotoHomePage()">Ok</button>
+        </div>
+    </div>
+</ion-content>

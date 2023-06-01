@@ -1,0 +1,138 @@
+<!--
+	Generated template for the CustomerDetailPage page.
+	
+	See http://ionicframework.com/docs/components/#navigation for more info on
+	Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-title>{{'Pet Parent Detail' | translate}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	
+	<div class="profile-container">
+		<div class="background-white hero"></div>
+		<div class="user-profile">
+			<div class="dp">
+				<div class="dp-hidden">
+					<img src="assets/imgs/man.svg">
+				</div>
+			</div>
+			<h2>{{customer_details.customer_name | titlecase}}</h2>
+			<h6>({{customer_details.mobile_no}})</h6>
+			
+			<p class="{{customer_details.status}}">
+				{{customer_details.status}}
+				<i class="material-icons Verified " *ngIf="customer_details.status =='Verified'">verified_user </i>
+				<i class="material-icons Pending " *ngIf="customer_details.status =='Pending'">update</i>
+				<i class="material-icons Reject " *ngIf="customer_details.status =='Reject'">cancel</i>
+			</p>
+			
+		</div>
+		
+		
+		<div class="padding16">
+			<div class="profile-card" >
+				<div class="text-box">
+					<p>{{'Email' | translate}}</p>
+					<h6>{{customer_details.email ? customer_details.email : 'N/A'}}</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Whatsapp No' | translate}}</p>
+					<h6>{{customer_details.whatsapp_mobile_no ? customer_details.whatsapp_mobile_no : 'N/A'}}</h6>
+				</div>
+				<div class="text-box">
+					<p>{{ 'Address' | translate}}</p>
+					<h6>{{customer_details.address |titlecase}} {{customer_details.state |titlecase}} {{customer_details.district |titlecase}} {{customer_details.city |titlecase}} {{customer_details.pincode }}</h6>
+				</div>
+				<!-- <div class="text-box">
+					<p>{{'Average Selling Price' | translate}}</p>
+					<h6>{{customer_details.average_selling_price}}</h6>
+				</div> -->
+				<div class="text-box">
+					<p>{{'Currently Brand Used' | translate}}</p>
+					<h6>{{customer_details.brand_currently_used}}</h6>
+				</div>
+				<!-- <div class="text-box">
+					<p>{{'Brand Orange Pet Nutrition' | translate}}</p>
+					<h6>{{customer_details.fidelet == '1' ? 'Fidele+':''  }}  </h6>
+					<h6>{{customer_details.arden_grange == '1' ? 'Arden Grange':''  }} </h6>
+					<h6> {{customer_details.taste_of_the_wild == '1' ? 'Taste Of the Wild (TOW)':''  }} </h6>
+					<h6> {{customer_details.none == '1' ? 'None':''  }}</h6>
+				</div> -->
+				<div class="text-box">
+					<p>{{'Pet Type' | translate}}</p>
+					<h6>{{customer_details.pet_type}}</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Pet Age' | translate}}</p>
+					<h6>{{customer_details.pet_age}}</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Pet Breed' | translate}}</p>
+					<h6>{{customer_details.pet_breed}}</h6>
+				</div>
+				
+				<div class="text-box">
+					<p>{{ 'Interested in Brands Starter Kit' | translate }}</p>
+					<h6>{{customer_details.nutrition_brand ? customer_details.nutrition_brand : 'N/A'}}</h6>
+
+				</div>
+				
+			</div>
+			
+			
+			<div class="profile-card" *ngIf="customer_details.status =='Verified'">
+				<div class="text-center">
+					<h2>{{ 'Assign Coupon Details' | translate }}</h2>
+				</div>
+				<div class="text-box">
+					<p>{{'Coupon Code' | translate}}</p>
+					<h6>{{coupon.coupon_code ? coupon.coupon_code :'N/A'}}</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Coupon Value' | translate}}</p>
+					<h6>{{coupon.discount_coupon_value ? coupon.discount_coupon_value :'N/A'}} Points</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Coupon Assign Date' | translate}}</p>
+					<h6 *ngIf="coupon.coupon_assign_date != '0000-00-00'">{{coupon.coupon_assign_date | date:'dd MMM yyyy'}}</h6>
+					<h6 *ngIf="coupon.coupon_assign_date == '0000-00-00'">N/A</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Coupon Assign Date' | translate}}</p>
+					<h6 *ngIf="coupon.status_updated_date != '0000-00-00'">{{coupon.status_updated_date | date:'dd MMM yyyy'}}</h6>
+					<h6 *ngIf="coupon.status_updated_date == '0000-00-00'">N/A</h6>
+				</div>
+				<div class="text-box">
+					<p>{{'Used By' | translate}}</p>
+					<h6>{{dealerDetail.company_name | titlecase}}  - {{dealerDetail.mobile_no}}</h6>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			<!-- <div class="text-box">
+				
+				<h6>{{customer_details.coupon_assign_date | date:'d MMM,y'}}</h6>
+			</div> -->
+			<!-- 				
+				<div class="text-box" >
+					<p>{{'Discount Coupon Status' | translate}}</p>
+					<h6>{{customer_details.discount_coupon_status}}</h6>
+				</div> -->
+				<!-- <div class="text-box" >
+					<p>{{'Update Date' | translate}}</p>
+					<h6>{{customer_details.status_updated_date | date:'d MMM,y'}}</h6>
+				</div> -->
+			</div>
+		</div>
+		
+		
+	</ion-content>
+	
